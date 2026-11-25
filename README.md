@@ -1,14 +1,13 @@
-# WireGuard & OpenVPN Linux installer
-## Блокировка двухстороннего пинга сайтов для скрытия VPN туннеля
-`iptables -A OUTPUT -p icmp --icmp-type echo-request -j DROP` *Блокирует исходящий Ping*
-
-`iptables -A INPUT -p icmp --icmp-type echo-reply -j DROP`  *Блокирует входящий Ping*
+## Блокировка двухстороннего пинга сайтов для скрытия VPN туннеля Debian 12, Ubuntu 20.04, 22.04, 24.06, 26.04
 
 Отключение ICMP пакетов на уровне ядра:
 `sudo nano /etc/sysctl.conf`
 
 Затем добавьте в файл следующую строку:
 `net.ipv4.icmp_echo_ignore_all = 1`
+
+"Опционально" в случае наличия на ВМ IPv6
+'net.ipv6.icmp.echo_ignore_all = 1'
 
 Сохраните и закройте файл.
 Затем введите следующую команду в Терминале, чтобы применить эту конфигурацию без перезагрузки:
